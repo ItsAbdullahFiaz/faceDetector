@@ -6,9 +6,9 @@ import {
   Text,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CameraComponent from "./CameraComponent";
-import DocumentScanner from 'react-native-document-scanner-plugin';
+import DocumentScanner from "react-native-document-scanner-plugin";
 
 const Welcome = () => {
   const [openCamera, setOpenCamera] = useState(false);
@@ -26,15 +26,8 @@ const Welcome = () => {
     try {
       const result = await DocumentScanner.scanDocument({
         maxNumDocuments: 2,
-        overlay: {
-          borderColor: '#FF0000',
-          borderWidth: 2,
-          borderRadius: 10,
-          height: '80%',
-          width: '80%',
-        },
+        croppedImageQuality: 100,
       });
-      // const base64Image = result.uri;
       setScannedImages(result.scannedImages);
       console.log(result.scannedImages);
     } catch (error) {
@@ -75,10 +68,7 @@ const Welcome = () => {
                 console.log("ITEM==>", item.uri);
                 return (
                   <View style={styles.imageContainer}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item.uri }}
-                    />
+                    <Image style={styles.image} source={{ uri: item.uri }} />
                   </View>
                 );
               }}
@@ -88,10 +78,7 @@ const Welcome = () => {
               renderItem={({ item }) => {
                 return (
                   <View style={styles.imageContainer}>
-                    <Image
-                      style={styles.image}
-                      source={{ uri: item }}
-                    />
+                    <Image style={styles.image} source={{ uri: item }} />
                   </View>
                 );
               }}
