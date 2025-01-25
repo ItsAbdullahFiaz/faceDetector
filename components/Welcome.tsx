@@ -27,6 +27,14 @@ const Welcome = () => {
       const result = await DocumentScanner.scanDocument({
         maxNumDocuments: 2,
         croppedImageQuality: 100,
+        overlay: {
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          borderColor: '#ffffff',
+          borderWidth: 2,
+          height: '70%',
+          width: '90%',
+          marginTop: 0,
+        }
       });
       setScannedImages(result.scannedImages);
       console.log(result.scannedImages);
